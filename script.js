@@ -49,8 +49,22 @@ function saveCustomization() {
   const eyeColor = document.getElementById("eyeColor").value;
   localStorage.setItem("userName", userName);
   localStorage.setItem("eyeColor", eyeColor);
-  alert("Customization Saved!");
-  document.getElementById("customizeModal").classList.add("hidden");
+  
+  // Get the modal element
+  const modal = document.getElementById("customizeModal");
+  
+  // Replace modal content with the confirmation message and OK button
+  modal.innerHTML = `
+    <div class="bg-white p-6 rounded shadow-lg w-80">
+      <h2 class="text-xl font-bold mb-4">Customization Saved!</h2>
+      <button id="okButton" class="btn">OK</button>
+    </div>
+  `;
+  
+  // Add event listener to the OK button to refresh the page
+  document.getElementById("okButton").addEventListener("click", function() {
+    location.reload();
+  });
 }
 
 // Load a story based on its ID from the library data
