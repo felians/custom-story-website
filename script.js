@@ -1,109 +1,77 @@
-// ====================
-// INDEX PAGE: Load story list from library.json
-// ====================
-document.addEventListener("DOMContentLoaded", function () {
-  // Check if the element with id "storyList" exists (i.e., we're on index.html)
-  if (document.getElementById("storyList")) {
-    fetch("./library.json")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then(data => {
-        const storyList = document.getElementById("storyList");
-        // Verify that data.stories exists and is an array
-        if (data.stories && Array.isArray(data.stories)) {
-          data.stories.forEach(story => {
-            const li = document.createElement("li");
-            li.classList.add("mb-2");
-            const a = document.createElement("a");
-            // Use encodeURIComponent to ensure story.id is safe in the URL
-            a.href = `story.html?story=${encodeURIComponent(story.id)}`;
-            a.innerText = story.title;
-            a.classList.add("text-xl", "text-purple-700", "hover:underline");
-            li.appendChild(a);
-            storyList.appendChild(li);
-          });
-        } else {
-          storyList.innerText = "No stories found.";
-        }
-      })
-      .catch(error => {
-        console.error("Error loading library.json:", error);
-        document.getElementById("storyList").innerText = "Error loading stories.";
+// Global variables to track the current story and chapter
+let currentStory = null;
+let currentChapter = 0;
+
+// When the DOM is ready, fetch library.json and set up event listeners
+document.addEventListener("DOMContentLoaded", function() {
+  // Populate the story selection dropdown
+  fetch("./library.json")
+    .then(response => response.json())
+    .then(data => {
+      const storySelect = document.getElementById("storySelect");
+      data.stories.forEach(story => {
+        const option = document.createElement("option");
+        option.value = story.id;
+        option.text = story.title;
+        storySelect.appendChild(option);
       });
-  }
+      // When a story is selected, load it
+      storySelect.addEventListener("change", function() {
+        const selectedId = storySelect.value;
+        if (selectedId) {
+          loadStory(selectedId, data.stories);
+        } else {
+          document.getElementById("storyPanel").classList.add("hidden");
+        }
+      });
+    })
+    .catch(error => {
+      console.error("Error loading library.json:", error);
+      alert("Error loading stories.");
+    });
+  
+  // Modal functionality for customization
+  const customizeModal = document.getElementById("customizeModal");
+  const customizeBtn = document.getElementById("customizeBtn");
+  const closeModalBtn = document.getElementById("closeModal");
+  
+  customizeBtn.addEventListener("click", function() {
+    customizeModal.classList.remove("hidden");
+  });
+  
+  closeModalBtn.addEventListener("click", function() {
+    customizeModal.classList.add("hidden");
+  });
 });
 
-// ====================
-// CUSTOMIZE PAGE: Save user's customization settings
-// ====================
+// Save customization settings (name & eye color) in localStorage
 function saveCustomization() {
   const userName = document.getElementById("userName").value;
   const eyeColor = document.getElementById("eyeColor").value;
   localStorage.setItem("userName", userName);
   localStorage.setItem("eyeColor", eyeColor);
   alert("Customization Saved!");
+  document.getElementById("customizeModal").classList.add("hidden");
 }
 
-// ====================
-// STORY PAGE: Load selected story and chapters, with progress saving
-// ====================
-if (window.location.pathname.includes("story.html")) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const storyId = urlParams.get("story");
-  // Get current chapter from localStorage or default to 0 (first chapter)
-  let currentChapter = parseInt(localStorage.getItem(storyId + "_chapter"), 10) || 0;
-
-  fetch("./library.json")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then(data => {
-      const story = data.stories.find(s => s.id === storyId);
-      if (!story) {
-        document.getElementById("storyTitle").innerText = "Story Not Found";
-        document.getElementById("storyContent").innerText = "";
-        return;
-      }
-
-      document.getElementById("storyTitle").innerText = story.title;
-      loadChapter(story, currentChapter);
-
-      // Next Chapter Button
-      document.getElementById("nextChapter").addEventListener("click", () => {
-        if (currentChapter < story.chapters.length - 1) {
-          currentChapter++;
-          localStorage.setItem(storyId + "_chapter", currentChapter);
-          loadChapter(story, currentChapter);
-        }
-      });
-
-      // Previous Chapter Button
-      document.getElementById("prevChapter").addEventListener("click", () => {
-        if (currentChapter > 0) {
-          currentChapter--;
-          localStorage.setItem(storyId + "_chapter", currentChapter);
-          loadChapter(story, currentChapter);
-        }
-      });
-    })
-    .catch(error => {
-      console.error("Error loading library.json:", error);
-      document.getElementById("storyContent").innerText = "Error loading story.";
-    });
+// Load a story based on its ID from the library
+function loadStory(storyId, stories) {
+  currentStory = stories.find(s => s.id === storyId);
+  if (!currentStory) {
+    alert("Story not found.");
+    return;
+  }
+  // Retrieve saved chapter progress or start at chapter 0
+  currentChapter = parseInt(localStorage.getItem(storyId + "_chapter"), 10) || 0;
+  displayChapter();
+  // Show the story panel
+  document.getElementById("storyPanel").classList.remove("hidden");
 }
 
-// ====================
-// Helper Function: Load a chapter and replace placeholders
-// ====================
-function loadChapter(story, chapterIndex) {
-  const chapter = story.chapters[chapterIndex];
+// Display the current chapter with customized details
+function displayChapter() {
+  if (!currentStory) return;
+  const chapter = currentStory.chapters[currentChapter];
   if (!chapter) {
     document.getElementById("storyContent").innerText = "Chapter not found.";
     return;
@@ -113,13 +81,32 @@ function loadChapter(story, chapterIndex) {
   const userName = localStorage.getItem("userName") || "[Your Name]";
   const eyeColor = localStorage.getItem("eyeColor") || "[Eye Color]";
   
-  // Replace placeholders in the chapter content
+  // Replace placeholders in chapter content
   let content = chapter.content;
   content = content.replace(/\[Your Name\]/g, userName).replace(/\[Eye Color\]/g, eyeColor);
   
+  // Update title and content
+  document.getElementById("storyTitle").innerText = `${currentStory.title} - Chapter ${chapter.chapter}`;
   document.getElementById("storyContent").innerHTML = content;
-
-  // Update navigation buttons based on current chapter
-  document.getElementById("prevChapter").style.display = chapterIndex > 0 ? "inline-block" : "none";
-  document.getElementById("nextChapter").style.display = chapterIndex < story.chapters.length - 1 ? "inline-block" : "none";
+  
+  // Update navigation buttons' visibility
+  document.getElementById("prevChapter").style.display = currentChapter > 0 ? "inline-block" : "none";
+  document.getElementById("nextChapter").style.display = currentChapter < currentStory.chapters.length - 1 ? "inline-block" : "none";
+  
+  // Set up event listeners for navigation buttons
+  document.getElementById("prevChapter").onclick = function() {
+    if (currentChapter > 0) {
+      currentChapter--;
+      localStorage.setItem(currentStory.id + "_chapter", currentChapter);
+      displayChapter();
+    }
+  };
+  
+  document.getElementById("nextChapter").onclick = function() {
+    if (currentChapter < currentStory.chapters.length - 1) {
+      currentChapter++;
+      localStorage.setItem(currentStory.id + "_chapter", currentChapter);
+      displayChapter();
+    }
+  };
 }
