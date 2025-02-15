@@ -2,7 +2,7 @@
   "stories": [
     {
       "id": "story1",
-      "title": "Story 1",
+      "title": "Fanfiction 1",
       "chapters": [
         {
           "chapter": 1,
@@ -16,7 +16,7 @@
     },
     {
       "id": "story2",
-      "title": "Story 2",
+      "title": "Fanfiction 2",
       "chapters": [
         {
           "chapter": 1,
