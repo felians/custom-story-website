@@ -104,3 +104,28 @@ function loadChapter(story, chapterIndex) {
   document.getElementById("prevChapter").style.display = chapterIndex > 0 ? "inline-block" : "none";
   document.getElementById("nextChapter").style.display = chapterIndex < story.chapters.length - 1 ? "inline-block" : "none";
 }
+
+function displayStories(stories) {
+    const storyContainer = document.getElementById("story-container"); 
+    if (!storyContainer) {
+        console.error("Story container not found!");
+        return;
+    }
+
+    storyContainer.innerHTML = ""; // Clear existing content
+
+    stories.forEach(story => {
+        const storyElement = document.createElement("div");
+        storyElement.classList.add("story-card", "p-4", "rounded-lg", "shadow-md");
+
+        storyElement.innerHTML = `
+            <h2 class="text-xl font-bold">${story.title}</h2>
+            <p class="text-sm text-gray-600">By ${story.author}</p>
+            <p class="mt-2">${story.description}</p>
+            <a href="story.html?id=${story.id}" class="btn mt-3 inline-block">Read More</a>
+        `;
+
+        storyContainer.appendChild(storyElement);
+    });
+}
+
