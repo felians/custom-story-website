@@ -3,7 +3,7 @@
 // --------------------
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("storyList")) {
-    fetch("library.json")
+    fetch("./library.json")
       .then(response => response.json())
       .then(data => {
         let storyList = document.getElementById("storyList");
