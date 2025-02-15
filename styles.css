@@ -1,24 +1,75 @@
+/* Import a pretty font from Google (optional) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #E6DFF1; /* Lilac */
-    text-align: center;
+  font-family: 'Poppins', sans-serif;
+  background-color: #E6DFF1; /* Soft lilac background */
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #A082C9;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 0.5rem 0;
+}
+
+a {
+  color: #A082C9;
+  text-decoration: none;
 }
 
 .btn {
-    display: block;
-    margin: 10px;
-    padding: 10px;
-    background: #A082C9;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #A082C9;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chapter-nav {
+  margin: 1rem 0;
+}
+
+.chapter-nav button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  background-color: #A082C9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chapter-nav button:hover {
+  background-color: #967BB6;
 }
