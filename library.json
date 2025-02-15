@@ -1,16 +1,28 @@
-[
+{
+  "stories": [
     {
-        "id": 1,
-        "title": "My First Fanfiction",
-        "author": "Your Name",
-        "description": "A thrilling romance adventure.",
-        "content": ["Chapter 1 text here...", "Chapter 2 text here..."]
+      "id": "story1",
+      "title": "Fanfiction 1",
+      "chapters": [
+        {
+          "chapter": 1,
+          "content": "Once upon a time, [Your Name] with [Eye Color] eyes met their fate in a mysterious alley..."
+        },
+        {
+          "chapter": 2,
+          "content": "The journey continued as [Your Name] ventured deeper into the unknown, each step echoing with destiny..."
+        }
+      ]
     },
     {
-        "id": 2,
-        "title": "Another Story",
-        "author": "Your Name",
-        "description": "Mystery and drama unfold.",
-        "content": ["Chapter 1 text...", "Chapter 2 text..."]
+      "id": "story2",
+      "title": "Fanfiction 2",
+      "chapters": [
+        {
+          "chapter": 1,
+          "content": "A mysterious force pulled [Your Name] into another world, where magic reigned and legends were born..."
+        }
+      ]
     }
-]
+  ]
+}
