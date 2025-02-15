@@ -2,51 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Story Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fanfiction Library</title>
+  <!-- Tailwind CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<style>
-    body {
-        background-color: #f3e8ff; /* Soft Lilac */
-        color: #4a2c6d; /* Dark Purple */
-        font-family: "Poppins", sans-serif;
-    }
-    .container {
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .story-card {
-        background: #fff;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 15px;
-        transition: 0.3s;
-    }
-    .story-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-    }
-    .btn {
-        background: #7c3aed;
-        color: white;
-        padding: 8px 12px;
-        border-radius: 8px;
-        transition: 0.3s;
-    }
-    .btn:hover {
-        background: #5b21b6;
-    }
-</style>
-
+  <!-- Custom Styles -->
+  <link href="styles.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-lilac">
   <div class="container">
-    <h1>📚 Story Library</h1>
-    <ul id="storyList">
+    <h1 class="text-3xl font-bold mb-4">📚 Fanfiction Library</h1>
+    <ul id="storyList" class="mb-4">
       <!-- Stories will be loaded dynamically from library.json -->
     </ul>
     <a href="customize.html" class="btn">Customize Your Story</a>
