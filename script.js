@@ -2,9 +2,8 @@
 let currentStory = null;
 let currentChapter = 0;
 
-// When the DOM is ready, fetch library.json and set up event listeners
 document.addEventListener("DOMContentLoaded", function() {
-  // Populate the story selection dropdown
+  // Fetch the library.json file to populate the story selection dropdown
   fetch("./library.json")
     .then(response => response.json())
     .then(data => {
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         option.text = story.title;
         storySelect.appendChild(option);
       });
-      // When a story is selected, load it
+      // Listen for story selection changes
       storySelect.addEventListener("change", function() {
         const selectedId = storySelect.value;
         if (selectedId) {
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
       alert("Error loading stories.");
     });
   
-  // Modal functionality for customization
+  // Set up modal functionality for customization
   const customizeModal = document.getElementById("customizeModal");
   const customizeBtn = document.getElementById("customizeBtn");
   const closeModalBtn = document.getElementById("closeModal");
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// Save customization settings (name & eye color) in localStorage
+// Save customization settings in localStorage
 function saveCustomization() {
   const userName = document.getElementById("userName").value;
   const eyeColor = document.getElementById("eyeColor").value;
@@ -54,17 +53,17 @@ function saveCustomization() {
   document.getElementById("customizeModal").classList.add("hidden");
 }
 
-// Load a story based on its ID from the library
+// Load a story based on its ID from the library data
 function loadStory(storyId, stories) {
   currentStory = stories.find(s => s.id === storyId);
   if (!currentStory) {
     alert("Story not found.");
     return;
   }
-  // Retrieve saved chapter progress or start at chapter 0
+  // Retrieve saved chapter progress or default to the first chapter (index 0)
   currentChapter = parseInt(localStorage.getItem(storyId + "_chapter"), 10) || 0;
   displayChapter();
-  // Show the story panel
+  // Reveal the story panel
   document.getElementById("storyPanel").classList.remove("hidden");
 }
 
@@ -81,15 +80,15 @@ function displayChapter() {
   const userName = localStorage.getItem("userName") || "[Your Name]";
   const eyeColor = localStorage.getItem("eyeColor") || "[Eye Color]";
   
-  // Replace placeholders in chapter content
+  // Replace placeholders in the chapter content
   let content = chapter.content;
   content = content.replace(/\[Your Name\]/g, userName).replace(/\[Eye Color\]/g, eyeColor);
   
-  // Update title and content
+  // Update the story title and content in the DOM
   document.getElementById("storyTitle").innerText = `${currentStory.title} - Chapter ${chapter.chapter}`;
   document.getElementById("storyContent").innerHTML = content;
   
-  // Update navigation buttons' visibility
+  // Update navigation button visibility
   document.getElementById("prevChapter").style.display = currentChapter > 0 ? "inline-block" : "none";
   document.getElementById("nextChapter").style.display = currentChapter < currentStory.chapters.length - 1 ? "inline-block" : "none";
   
