@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Story</title>
-    <link href="styles.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story</title>
+  <link href="styles.css" rel="stylesheet">
 </head>
-<body class="bg-lilac">
-    <div class="container">
-        <h1 id="storyTitle"></h1>
-        <p id="storyContent"></p>
-        
-        <button id="prevChapter" style="display:none;">Previous</button>
-        <button id="nextChapter">Next Chapter</button>
-        <a href="index.html" class="btn">Back to Index</a>
+<body>
+  <div class="container">
+    <h1 id="storyTitle">Loading...</h1>
+    <div id="storyContent">Loading your story...</div>
+    
+    <div class="chapter-nav">
+      <button id="prevChapter" style="display:none;">Previous Chapter</button>
+      <button id="nextChapter" style="display:none;">Next Chapter</button>
     </div>
-    <script src="script.js"></script>
+    
+    <a href="index.html" class="btn">Back to Library</a>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
