@@ -1,0 +1,28 @@
+{
+  "stories": [
+    {
+      "id": "story1",
+      "title": "Fanfiction 1",
+      "chapters": [
+        {
+          "chapter": 1,
+          "content": "Once upon a time, <span id='userNamePlaceholder'>[Your Name]</span> with <span id='eyeColorPlaceholder'>[Eye Color]</span> eyes met their fate..."
+        },
+        {
+          "chapter": 2,
+          "content": "The journey continued as <span id='userNamePlaceholder'>[Your Name]</span> ventured deeper..."
+        }
+      ]
+    },
+    {
+      "id": "story2",
+      "title": "Fanfiction 2",
+      "chapters": [
+        {
+          "chapter": 1,
+          "content": "A mysterious force pulled <span id='userNamePlaceholder'>[Your Name]</span> into another world..."
+        }
+      ]
+    }
+  ]
+}
