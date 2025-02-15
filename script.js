@@ -1,18 +1,19 @@
 // --------------------
-// Index Page: Load story list from library.json
+// INDEX PAGE: Load story list from library.json
 // --------------------
-document.addEventListener("DOMContentLoaded", function() {
-  // Check if we're on the index page (storyList element exists)
-  if(document.getElementById("storyList")) {
+document.addEventListener("DOMContentLoaded", function () {
+  if (document.getElementById("storyList")) {
     fetch("library.json")
       .then(response => response.json())
       .then(data => {
         let storyList = document.getElementById("storyList");
         data.stories.forEach(story => {
           let li = document.createElement("li");
+          li.classList.add("mb-2");
           let a = document.createElement("a");
           a.href = `story.html?story=${story.id}`;
           a.innerText = story.title;
+          a.classList.add("text-xl", "text-purple-700", "hover:underline");
           li.appendChild(a);
           storyList.appendChild(li);
         });
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // --------------------
-// Customize Page: Save user's customization settings
+// CUSTOMIZE PAGE: Save user's customization settings
 // --------------------
 function saveCustomization() {
   let userName = document.getElementById("userName").value;
@@ -36,12 +37,12 @@ function saveCustomization() {
 }
 
 // --------------------
-// Story Page: Load selected story and chapters
+// STORY PAGE: Load selected story and chapters, with progress saving
 // --------------------
 if (window.location.pathname.includes("story.html")) {
   let urlParams = new URLSearchParams(window.location.search);
   let storyId = urlParams.get("story");
-  // Get current chapter from local storage or default to 0 (first chapter)
+  // Get current chapter from localStorage or default to 0 (first chapter)
   let currentChapter = parseInt(localStorage.getItem(storyId + "_chapter")) || 0;
 
   fetch("library.json")
@@ -81,7 +82,6 @@ if (window.location.pathname.includes("story.html")) {
     });
 }
 
-// Function to load chapter content, replacing placeholders with user data
 function loadChapter(story, chapterIndex) {
   let chapter = story.chapters[chapterIndex];
   if (!chapter) {
@@ -93,39 +93,14 @@ function loadChapter(story, chapterIndex) {
   let userName = localStorage.getItem("userName") || "[Your Name]";
   let eyeColor = localStorage.getItem("eyeColor") || "[Eye Color]";
   
-  // Replace all occurrences of placeholders (using regex with global flag)
+  // Replace placeholders
   let content = chapter.content
     .replace(/\[Your Name\]/g, userName)
     .replace(/\[Eye Color\]/g, eyeColor);
   
   document.getElementById("storyContent").innerHTML = content;
 
-  // Update navigation buttons based on current chapter
+  // Update navigation buttons
   document.getElementById("prevChapter").style.display = chapterIndex > 0 ? "inline-block" : "none";
   document.getElementById("nextChapter").style.display = chapterIndex < story.chapters.length - 1 ? "inline-block" : "none";
 }
-
-function displayStories(stories) {
-    const storyContainer = document.getElementById("story-container"); 
-    if (!storyContainer) {
-        console.error("Story container not found!");
-        return;
-    }
-
-    storyContainer.innerHTML = ""; // Clear existing content
-
-    stories.forEach(story => {
-        const storyElement = document.createElement("div");
-        storyElement.classList.add("story-card", "p-4", "rounded-lg", "shadow-md");
-
-        storyElement.innerHTML = `
-            <h2 class="text-xl font-bold">${story.title}</h2>
-            <p class="text-sm text-gray-600">By ${story.author}</p>
-            <p class="mt-2">${story.description}</p>
-            <a href="story.html?id=${story.id}" class="btn mt-3 inline-block">Read More</a>
-        `;
-
-        storyContainer.appendChild(storyElement);
-    });
-}
-
