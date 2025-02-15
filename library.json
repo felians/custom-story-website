@@ -1,28 +1,16 @@
-{
-  "stories": [
+[
     {
-      "id": "story1",
-      "title": "Fanfiction 1",
-      "chapters": [
-        {
-          "chapter": 1,
-          "content": "Once upon a time, <span id='userNamePlaceholder'>[Your Name]</span> with <span id='eyeColorPlaceholder'>[Eye Color]</span> eyes met their fate..."
-        },
-        {
-          "chapter": 2,
-          "content": "The journey continued as <span id='userNamePlaceholder'>[Your Name]</span> ventured deeper..."
-        }
-      ]
+        "id": 1,
+        "title": "My First Fanfiction",
+        "author": "Your Name",
+        "description": "A thrilling romance adventure.",
+        "content": ["Chapter 1 text here...", "Chapter 2 text here..."]
     },
     {
-      "id": "story2",
-      "title": "Fanfiction 2",
-      "chapters": [
-        {
-          "chapter": 1,
-          "content": "A mysterious force pulled <span id='userNamePlaceholder'>[Your Name]</span> into another world..."
-        }
-      ]
+        "id": 2,
+        "title": "Another Story",
+        "author": "Your Name",
+        "description": "Mystery and drama unfold.",
+        "content": ["Chapter 1 text...", "Chapter 2 text..."]
     }
-  ]
-}
+]
