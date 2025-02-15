@@ -10,15 +10,13 @@ body {
 /* Container styling */
 .container {
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 20px;
   background: white;
+  padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 
-/* Custom lilac background class */
+/* Background helper */
 .bg-lilac {
   background-color: #f3e8ff;
 }
@@ -31,20 +29,8 @@ body {
   border-radius: 8px;
   transition: 0.3s;
   text-decoration: none;
+  cursor: pointer;
 }
 .btn:hover {
   background: #5b21b6;
-}
-
-/* Story card styling (if needed) */
-.story-card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  transition: 0.3s;
-}
-.story-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
