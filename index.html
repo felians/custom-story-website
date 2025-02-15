@@ -10,13 +10,51 @@
   <link href="styles.css" rel="stylesheet">
 </head>
 <body class="bg-lilac">
-  <div class="container">
-    <h1 class="text-3xl font-bold mb-4">📚Library</h1>
-    <ul id="storyList" class="mb-4">
-      <!-- Stories will be loaded dynamically from library.json -->
-    </ul>
-    <a href="customize.html" class="btn">Customize Your Story</a>
+  <div class="container mx-auto p-6">
+    <!-- Header with Title and Customize Button -->
+    <header class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold text-purple-700">📚 Library</h1>
+      <button id="customizeBtn" class="btn">Customize</button>
+    </header>
+
+    <!-- Story Selection Dropdown -->
+    <div class="mb-6">
+      <label for="storySelect" class="block text-lg font-semibold text-purple-700 mb-2">Select Story:</label>
+      <select id="storySelect" class="border p-2 rounded w-full">
+        <option value="">-- Choose a Story --</option>
+      </select>
+    </div>
+
+    <!-- Story Panel: Shown Once a Story is Selected -->
+    <div id="storyPanel" class="hidden">
+      <h2 id="storyTitle" class="text-2xl font-bold mb-4"></h2>
+      <div id="storyContent" class="mb-4"></div>
+      <div class="chapter-nav mb-4">
+        <button id="prevChapter" class="btn mr-2 hidden">Previous Chapter</button>
+        <button id="nextChapter" class="btn hidden">Next Chapter</button>
+      </div>
+    </div>
   </div>
+  
+  <!-- Modal for Customization -->
+  <div id="customizeModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded shadow-lg w-80">
+      <h2 class="text-xl font-bold mb-4">Customize Your Story</h2>
+      <div class="mb-4">
+        <label for="userName" class="block text-left">Your Name:</label>
+        <input type="text" id="userName" placeholder="Enter your name" class="border p-2 rounded w-full">
+      </div>
+      <div class="mb-4">
+        <label for="eyeColor" class="block text-left">Eye Color:</label>
+        <input type="text" id="eyeColor" placeholder="Enter your eye color" class="border p-2 rounded w-full">
+      </div>
+      <div class="flex justify-end">
+        <button id="closeModal" class="btn mr-2">Close</button>
+        <button onclick="saveCustomization()" class="btn">Save</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
