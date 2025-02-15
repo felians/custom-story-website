@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customize Your Story</title>
-    <link href="styles.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customize Your Story</title>
+  <link href="styles.css" rel="stylesheet">
 </head>
-<body class="bg-lilac">
-    <div class="container">
-        <h1>✨ Customize Your Story ✨</h1>
-        <label>Your Name:</label>
-        <input type="text" id="userName">
-        
-        <label>Eye Color:</label>
-        <input type="text" id="eyeColor">
-        
-        <button onclick="saveCustomization()">Save</button>
-    </div>
-    <script src="script.js"></script>
+<body>
+  <div class="container">
+    <h1>✨ Customize Your Story</h1>
+    <label for="userName">Your Name:</label>
+    <input type="text" id="userName" placeholder="Enter your name">
+    
+    <label for="eyeColor">Eye Color:</label>
+    <input type="text" id="eyeColor" placeholder="Enter your eye color">
+    
+    <button onclick="saveCustomization()">Save</button>
+    <a href="index.html" class="btn">Back to Library</a>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
