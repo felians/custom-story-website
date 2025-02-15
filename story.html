@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Story</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Custom Styles -->
   <link href="styles.css" rel="stylesheet">
 </head>
-<body>
-  <div class="container" id="story-container">
-    <h1 id="storyTitle">Loading...</h1>
-    <div id="storyContent">Loading your story...</div>
+<body class="bg-lilac">
+  <div class="container">
+    <h1 id="storyTitle" class="text-3xl font-bold mb-4">Loading...</h1>
+    <div id="storyContent" class="mb-4">Loading your story...</div>
     
-    <div class="chapter-nav">
-      <button id="prevChapter" style="display:none;">Previous Chapter</button>
-      <button id="nextChapter" style="display:none;">Next Chapter</button>
+    <div class="chapter-nav mb-4">
+      <button id="prevChapter" style="display:none;" class="btn mr-2">Previous Chapter</button>
+      <button id="nextChapter" style="display:none;" class="btn">Next Chapter</button>
     </div>
-    
     <a href="index.html" class="btn">Back to Library</a>
   </div>
   <script src="script.js"></script>
