@@ -35,7 +35,13 @@ body {
 }
 
 .kofi-button {
-  background: #5b21b6;
+  background: #f3e8ff;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .btn:hover {
