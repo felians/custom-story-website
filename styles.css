@@ -35,20 +35,9 @@ body {
 }
 
 .kofi-button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: #ff5f5f;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s ease;
+  background: #5b21b6;
 }
 
-.kofi-button:hover {
-    background-color: #d94c4c;
+.btn:hover {
+  background: #7c3aed;
 }
