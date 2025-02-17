@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Story</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Add New Story</h2>
+    <label>Story Title: <input type="text" id="storyTitle"></label><br>
+    <label>Story Key: <input type="text" id="storyKey"></label><br>
+    <label>Chapters (comma-separated):</label><br>
+    <textarea id="storyChapters"></textarea><br>
+    <button onclick="saveStory()">Save Story</button>
+
+    <script>
+        function saveStory() {
+            let title = document.getElementById("storyTitle").value;
+            let key = document.getElementById("storyKey").value;
+            let chapters = document.getElementById("storyChapters").value.split(",");
+
+            let newStory = { [key]: { "title": title, "chapters": chapters } };
+
+            fetch("library.json")
+                .then(response => response.json())
+                .then(data => {
+                    Object.assign(data, newStory);
+                    let jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+                    let link = document.createElement("a");
+                    link.href = URL.createObjectURL(jsonBlob);
+                    link.download = "library.json";
+                    link.click();
+                })
+                .catch(error => console.error("Error updating library:", error));
+        }
+    </script>
+</body>
+</html>
