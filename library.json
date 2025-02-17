@@ -1,28 +1,10 @@
 {
-  "stories": [
-    {
-      "id": "story1",
-      "title": "Story 1",
-      "chapters": [
-        {
-          "chapter": 1,
-          "content": "Once upon a time, [Your Name] with [Eye Color] eyes met their fate in a mysterious alley..."
-        },
-        {
-          "chapter": 2,
-          "content": "The journey continued as [Your Name] ventured deeper into the unknown, each step echoing with destiny..."
-        }
-      ]
-    },
-    {
-      "id": "story2",
-      "title": "Story 2",
-      "chapters": [
-        {
-          "chapter": 1,
-          "content": "A mysterious force pulled [Your Name] into another world, where magic reigned and legends were born..."
-        }
-      ]
+    "tyrant_king": {
+        "title": "The Tyrant King",
+        "chapters": [
+            "Sylus lounged on his grand obsidian throne, draped in casual arrogance...",
+            "The merchant froze, his mouth gaping before hurriedly forming words...",
+            "Get her out, he commanded his maid, who approached with trembling hands..."
+        ]
     }
-  ]
 }
