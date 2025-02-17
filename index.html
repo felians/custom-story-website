@@ -4,44 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reader</title>
-  <!-- Link to custom styles -->
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Styles (if any) -->
   <link rel="stylesheet" href="styles.css">
-  <!-- Defer our script -->
+  <!-- Our Script -->
   <script defer src="script.js"></script>
 </head>
-<body class="bg-lilac">
+<body class="bg-purple-50">
   <!-- Fixed Donation Button -->
-  <a href="https://ko-fi.com/YOUR_KOFI_LINK" class="donate-btn" target="_blank">☕ Donate</a>
+  <a href="https://ko-fi.com/YOUR_KOFI_LINK" class="fixed top-4 right-4 bg-pink-500 text-white px-4 py-2 rounded shadow" target="_blank">☕ Donate</a>
 
   <!-- Customization Popup -->
-  <div id="customPopup" class="popup">
-    <div class="popup-content">
-      <h2>Customize Your Story</h2>
-      <label for="customName">Name:</label>
-      <input type="text" id="customName" placeholder="Enter your name">
-      <label for="customEyeColor">Eye Color:</label>
-      <input type="text" id="customEyeColor" placeholder="Enter your eye color">
-      <div class="popup-buttons">
-        <button onclick="saveCustomization()">Save</button>
-        <button onclick="closeCustomization()">Close</button>
+  <div id="customPopup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded shadow-lg w-80">
+      <h2 class="text-xl font-bold mb-4">Customize Your Story</h2>
+      <label class="block mb-2">
+        Name:
+        <input type="text" id="customName" placeholder="Enter your name" class="mt-1 w-full border rounded px-2 py-1">
+      </label>
+      <label class="block mb-4">
+        Eye Color:
+        <input type="text" id="customEyeColor" placeholder="Enter your eye color" class="mt-1 w-full border rounded px-2 py-1">
+      </label>
+      <div class="flex justify-end space-x-2">
+        <button onclick="saveCustomization()" class="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+        <button onclick="closeCustomization()" class="bg-gray-300 px-4 py-2 rounded">Close</button>
       </div>
     </div>
   </div>
 
   <!-- Header & Navigation -->
-  <header>
-    <h1>📚 Library</h1>
-    <button onclick="openCustomization()">Customize</button>
-    <select id="storySelector" onchange="loadStory()">
-      <option value="">Select a Story</option>
-    </select>
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold text-purple-700 mb-4">📚 Library</h1>
+    <div class="flex justify-center mb-4 space-x-4">
+      <button onclick="openCustomization()" class="bg-blue-500 text-white px-4 py-2 rounded">Customize</button>
+      <select id="storySelector" onchange="loadStory()" class="border px-4 py-2 rounded">
+        <option value="">Select a Story</option>
+      </select>
+    </div>
   </header>
 
   <!-- Story Display Area -->
-  <div id="storyContainer" class="story-container">
-    <h2 id="storyTitle"></h2>
-    <div id="storyContent"></div>
-    <div id="chapterNav" class="chapter-nav"></div>
+  <div id="storyContainer" class="max-w-2xl mx-auto bg-white p-6 rounded shadow text-left">
+    <h2 id="storyTitle" class="text-2xl font-bold mb-4"></h2>
+    <div id="storyContent" class="mb-4"></div>
+    <div id="chapterNav" class="flex space-x-4"></div>
   </div>
 </body>
 </html>
