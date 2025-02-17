@@ -4,19 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin - Add Story</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="container">
-    <h2>Add New Story</h2>
-    <label for="adminStoryTitle">Story Title:</label>
-    <input type="text" id="adminStoryTitle" placeholder="Enter story title">
-    <label for="adminStoryKey">Story Key (unique id):</label>
-    <input type="text" id="adminStoryKey" placeholder="e.g., tyrant_king">
-    <label for="adminChapters">Chapters (separate chapters with a special delimiter, e.g., '||'):</label>
-    <textarea id="adminChapters" rows="8" placeholder="Chapter 1 content||Chapter 2 content||..."></textarea>
-    <button onclick="saveStory()">Save Story</button>
-    <p id="adminStatus" style="color: green; display: none;"></p>
+<body class="bg-purple-50 p-6">
+  <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+    <h2 class="text-2xl font-bold mb-4">Add New Story</h2>
+    <label class="block mb-2">Story Title:
+      <input type="text" id="adminStoryTitle" placeholder="Enter story title" class="mt-1 w-full border rounded px-2 py-1">
+    </label>
+    <label class="block mb-2">Story Key (unique id):
+      <input type="text" id="adminStoryKey" placeholder="e.g., tyrant_king" class="mt-1 w-full border rounded px-2 py-1">
+    </label>
+    <label class="block mb-2">Chapters (separate chapters with "||"):
+      <textarea id="adminChapters" rows="8" placeholder="Chapter 1 content||Chapter 2 content||..." class="mt-1 w-full border rounded px-2 py-1"></textarea>
+    </label>
+    <button onclick="saveStory()" class="bg-blue-500 text-white px-4 py-2 rounded">Save Story</button>
+    <p id="adminStatus" class="text-green-500 mt-4 hidden"></p>
   </div>
 
   <script>
@@ -44,7 +49,7 @@
       // Save updated library to localStorage
       localStorage.setItem("libraryData", JSON.stringify(library, null, 2));
 
-      // For now, simulate updating library.json by prompting a download
+      // Simulate updating library.json by prompting a download
       let jsonBlob = new Blob([JSON.stringify(library, null, 2)], { type: "application/json" });
       let link = document.createElement("a");
       link.href = URL.createObjectURL(jsonBlob);
@@ -52,7 +57,7 @@
       link.click();
 
       document.getElementById("adminStatus").textContent = "Story saved successfully!";
-      document.getElementById("adminStatus").style.display = "block";
+      document.getElementById("adminStatus").classList.remove("hidden");
     }
   </script>
 </body>
