@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fanfiction Reader</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fanfiction Reader</title>
+  <!-- Link to custom styles -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Defer our script -->
+  <script defer src="script.js"></script>
 </head>
-<body>
-    <!-- Fixed Donation Button -->
-    <a href="https://ko-fi.com/YOUR_KOFI_LINK" class="donate-btn" target="_blank">☕ Donate</a>
+<body class="bg-lilac">
+  <!-- Fixed Donation Button -->
+  <a href="https://ko-fi.com/YOUR_KOFI_LINK" class="donate-btn" target="_blank">☕ Donate</a>
 
-    <!-- Customization Popup -->
-    <div id="customPopup" class="popup">
-        <div class="popup-content">
-            <h2>Customize Your Story</h2>
-            <label>Name: <input type="text" id="customName"></label>
-            <label>Eye Color: <input type="text" id="customEyeColor"></label>
-            <button onclick="saveCustomization()">Save</button>
-        </div>
+  <!-- Customization Popup -->
+  <div id="customPopup" class="popup">
+    <div class="popup-content">
+      <h2>Customize Your Story</h2>
+      <label for="customName">Name:</label>
+      <input type="text" id="customName" placeholder="Enter your name">
+      <label for="customEyeColor">Eye Color:</label>
+      <input type="text" id="customEyeColor" placeholder="Enter your eye color">
+      <div class="popup-buttons">
+        <button onclick="saveCustomization()">Save</button>
+        <button onclick="closeCustomization()">Close</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Header & Navigation -->
-    <header>
-        <h1>📖 Fanfiction Library</h1>
-        <button onclick="openCustomization()">🔧 Customize</button>
-        <select id="storySelector" onchange="loadStory()">
-            <option value="">Select a Story</option>
-        </select>
-    </header>
+  <!-- Header & Navigation -->
+  <header>
+    <h1>📚 Fanfiction Library</h1>
+    <button onclick="openCustomization()">Customize</button>
+    <select id="storySelector" onchange="loadStory()">
+      <option value="">Select a Story</option>
+    </select>
+  </header>
 
-    <!-- Story Display -->
-    <div id="storyContainer">
-        <h2 id="storyTitle"></h2>
-        <p id="storyContent"></p>
-        <div id="chapterNav"></div>
-    </div>
-
+  <!-- Story Display Area -->
+  <div id="storyContainer" class="story-container">
+    <h2 id="storyTitle"></h2>
+    <div id="storyContent"></div>
+    <div id="chapterNav" class="chapter-nav"></div>
+  </div>
 </body>
 </html>
