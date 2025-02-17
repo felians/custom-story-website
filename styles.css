@@ -1,53 +1,101 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f3e8ff;
-    color: #333;
-    text-align: center;
-    padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3e8ff; /* Soft lilac background */
+  color: #4a2c6d;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
 }
 
-h1 { color: #7a42f4; }
+header {
+  margin-bottom: 20px;
+}
 
-#storyContainer {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 10px #aaa;
-    text-align: left;
+header h1 {
+  color: #7a42f4;
+  margin-bottom: 10px;
 }
 
 button, select {
-    background-color: #7a42f4;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+  background-color: #7a42f4;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.popup {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+.story-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  text-align: left;
 }
 
-.popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    margin: 20% auto;
+.chapter-nav {
+  margin-top: 20px;
+}
+
+.chapter-nav button {
+  margin-right: 10px;
 }
 
 .donate-btn {
-    position: fixed;
-    top: 10px; right: 10px;
-    background: #ff69b4;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #ff69b4;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Popup Styles */
+.popup {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: left;
+}
+
+.popup-content label {
+  display: block;
+  margin-top: 10px;
+}
+
+.popup-content input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.popup-buttons {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.popup-buttons button {
+  margin-left: 10px;
 }
