@@ -1,8 +1,7 @@
-let library = {}; // Global variable for the story library
-let currentChapter = 0; // Track current chapter
+let library = {}; // Global story library object
+let currentChapter = 0; // Tracks the current chapter for the selected story
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Fetch library.json from the same directory
   fetch("./library.json")
     .then(response => {
       if (!response.ok) {
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(data => {
-      // Assuming library.json has the structure: { "stories": { "story_key": { ... } } }
+      // Assuming library.json structure: { "stories": { "story_key": { ... } } }
       library = data.stories || {};
       populateStoryDropdown();
     })
@@ -38,7 +37,7 @@ function loadStory() {
   if (!storyKey || !library[storyKey]) return;
   const story = library[storyKey];
   document.getElementById("storyTitle").textContent = story.title;
-  currentChapter = 0; // Start at first chapter
+  currentChapter = 0; // Reset to first chapter
   displayChapter(story);
 }
 
@@ -60,7 +59,7 @@ function updateChapterNav(story) {
   const nav = document.getElementById("chapterNav");
   nav.innerHTML = ""; // Clear existing buttons
 
-  // Create Previous Chapter button
+  // Create Previous Chapter button if applicable
   if (currentChapter > 0) {
     let prevButton = document.createElement("button");
     prevButton.textContent = "Previous Chapter";
@@ -68,9 +67,10 @@ function updateChapterNav(story) {
       currentChapter--;
       displayChapter(story);
     };
+    prevButton.className = "bg-blue-500 text-white px-4 py-2 rounded";
     nav.appendChild(prevButton);
   }
-  // Create Next Chapter button
+  // Create Next Chapter button if applicable
   if (currentChapter < story.chapters.length - 1) {
     let nextButton = document.createElement("button");
     nextButton.textContent = "Next Chapter";
@@ -78,17 +78,22 @@ function updateChapterNav(story) {
       currentChapter++;
       displayChapter(story);
     };
+    nextButton.className = "bg-blue-500 text-white px-4 py-2 rounded";
     nav.appendChild(nextButton);
   }
 }
 
 // Customization Popup Functions
 function openCustomization() {
-  document.getElementById("customPopup").style.display = "flex";
+  const popup = document.getElementById("customPopup");
+  popup.classList.remove("hidden");
+  popup.classList.add("flex");
 }
 
 function closeCustomization() {
-  document.getElementById("customPopup").style.display = "none";
+  const popup = document.getElementById("customPopup");
+  popup.classList.add("hidden");
+  popup.classList.remove("flex");
 }
 
 function saveCustomization() {
@@ -96,13 +101,12 @@ function saveCustomization() {
   const eyeColorInput = document.getElementById("customEyeColor").value;
   localStorage.setItem("customName", nameInput);
   localStorage.setItem("customEyeColor", eyeColorInput);
-
-  // Instead of alert, change popup content with confirmation and an OK button
+  // Instead of an alert, update the popup content with confirmation and an OK button
   const popup = document.getElementById("customPopup");
   popup.innerHTML = `
-    <div class="popup-content">
-      <h2>Customization Saved!</h2>
-      <button onclick="refreshPage()">OK</button>
+    <div class="bg-white p-6 rounded shadow-lg w-80">
+      <h2 class="text-xl font-bold mb-4">Customization Saved!</h2>
+      <button onclick="refreshPage()" class="bg-blue-500 text-white px-4 py-2 rounded">OK</button>
     </div>
   `;
 }
