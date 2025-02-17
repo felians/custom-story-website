@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Story</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Add Story</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
     <h2>Add New Story</h2>
-    <label>Story Title: <input type="text" id="storyTitle"></label><br>
-    <label>Story Key: <input type="text" id="storyKey"></label><br>
-    <label>Chapters (comma-separated):</label><br>
-    <textarea id="storyChapters"></textarea><br>
+    <label for="adminStoryTitle">Story Title:</label>
+    <input type="text" id="adminStoryTitle" placeholder="Enter story title">
+    <label for="adminStoryKey">Story Key (unique id):</label>
+    <input type="text" id="adminStoryKey" placeholder="e.g., tyrant_king">
+    <label for="adminChapters">Chapters (separate chapters with a special delimiter, e.g., '||'):</label>
+    <textarea id="adminChapters" rows="8" placeholder="Chapter 1 content||Chapter 2 content||..."></textarea>
     <button onclick="saveStory()">Save Story</button>
+    <p id="adminStatus" style="color: green; display: none;"></p>
+  </div>
 
-    <script>
-        function saveStory() {
-            let title = document.getElementById("storyTitle").value;
-            let key = document.getElementById("storyKey").value;
-            let chapters = document.getElementById("storyChapters").value.split(",");
+  <script>
+    function saveStory() {
+      const title = document.getElementById("adminStoryTitle").value.trim();
+      const key = document.getElementById("adminStoryKey").value.trim();
+      const chaptersText = document.getElementById("adminChapters").value.trim();
+      if (!title || !key || !chaptersText) {
+        alert("Please fill in all fields.");
+        return;
+      }
+      const chaptersArray = chaptersText.split("||").map(chap => chap.trim());
+      const newStory = { [key]: { "title": title, "chapters": chaptersArray } };
 
-            let newStory = { [key]: { "title": title, "chapters": chapters } };
+      // Load existing library from localStorage (simulate reading library.json)
+      let libraryData = localStorage.getItem("libraryData");
+      let library;
+      if (libraryData) {
+        library = JSON.parse(libraryData);
+      } else {
+        library = { "stories": {} };
+      }
+      library.stories[key] = newStory[key];
 
-            fetch("library.json")
-                .then(response => response.json())
-                .then(data => {
-                    Object.assign(data, newStory);
-                    let jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-                    let link = document.createElement("a");
-                    link.href = URL.createObjectURL(jsonBlob);
-                    link.download = "library.json";
-                    link.click();
-                })
-                .catch(error => console.error("Error updating library:", error));
-        }
-    </script>
+      // Save updated library to localStorage
+      localStorage.setItem("libraryData", JSON.stringify(library, null, 2));
+
+      // For now, simulate updating library.json by prompting a download
+      let jsonBlob = new Blob([JSON.stringify(library, null, 2)], { type: "application/json" });
+      let link = document.createElement("a");
+      link.href = URL.createObjectURL(jsonBlob);
+      link.download = "library.json";
+      link.click();
+
+      document.getElementById("adminStatus").textContent = "Story saved successfully!";
+      document.getElementById("adminStatus").style.display = "block";
+    }
+  </script>
 </body>
 </html>
